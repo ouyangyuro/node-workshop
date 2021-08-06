@@ -25,10 +25,18 @@ job1
     })
     .then((resolve)=>{
         console.log("second",resolve)
-        return doWork("寫功課", 3000, true);
+        return doWork("寫功課", 3000, false);
     })
     .then((resolve)=>{
         console.log("third",resolve);
+    })
+    .catch((reject)=>{
+        //catch all reject(fault) from promise obj(物件)
+        console.log("error",reject);
+    })
+    .finally(()=>{
+        //no matter success or fail, all come to here 
+        console.log("finally");
     })
 
 // console.log(job1);//pennding

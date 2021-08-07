@@ -1,0 +1,62 @@
+<html lang="en">
+
+<head>
+    <title>XHR</title>
+</head>
+
+<body>
+    <button id="syncBtn">同步</button>
+    <button id="asyncBtn">非同步</button>
+    <button id="countBtn">測試按鈕</button>
+    <div id="count">0</div>
+    <div id="response">準備要顯示訊息</div>
+
+    <script>
+        var response = document.getElementById("response");
+        var syncBtn = document.getElementById("syncBtn");
+        syncBtn.addEventListener("click", async function () {
+            // 同步測試
+            response.innerHTML = "star同步"
+            var xhr = new XMLHttpRequest();
+            xhr.onload = function () {
+                if (this.status === 200) {
+                    response.innerHTML = `同步response: ${this.responseText}`;
+                }
+                else {
+                    response.innerHTML = `同步error: ${this.status}`;
+                }
+            };
+            //method, url, async(default true 非同步)
+            xhr.open("GET", "http://18.237.113.31:3000/", false);
+            xhr.send();
+        });
+
+        var asyncBtn = document.getElementById("asyncBtn");
+        asyncBtn.addEventListener("click", async function () {
+            // 不同步測試
+            response.innerHTML = "star非同步"
+            response.innerHTML = await new Promise((res,rej)=>{
+                var xhr = new XMLHttpRequest();
+                xhr.onload = function () {
+                if (this.status === 200) {
+                    res(`非同步response: ${this.responseText}`);
+                }
+                else {
+                    rej(`非同步error: ${this.status}`)
+                }
+            };
+            //method, url, async(default true 非同步)
+            xhr.open("GET", "http://18.237.113.31:3000/", true);
+            xhr.send();
+            })
+        });
+
+        var countBtn = document.getElementById("countBtn");
+        var count = document.getElementById("count");
+        countBtn.addEventListener("click", function () {
+            count.innerHTML = parseInt(count.innerHTML, 10) + 1;
+        });
+    </script>
+</body>
+
+</html>

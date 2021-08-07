@@ -13,5 +13,4 @@ function syncF() {
   syncF();
   console.log(5);
 
-  /* 4跑完後->下一行就進去function跑１遇到setTimeout先丟給web api做,然後跑３
-    ->funnction 跑完後跑５->最後eventloop看到stack空了將Q裡的東西搬過去跑２ */
+  /* 4跑完後->下一行就進去function跑１遇到setTimeout先丟給libuv(node.js(瀏覽器上是web api))做,然後跑３->funnction 跑完後跑５->最後eventloop看到stack空了將Q裡的東西搬過去跑２ */

@@ -20,18 +20,18 @@ new Promise((res, rej) => { //Promise並不會把非同步變同步,只是換樣
 })
     .then((data) => { //判斷對要執行的東西放這裡
         // console.log(data); //for check
-        axios.get("https://www.twse.com.tw/exchangeReport/STOCK_DAY", {
+        return axios.get("https://www.twse.com.tw/exchangeReport/STOCK_DAY", { //add return make promise chain
             params: {
                 response: "json",
                 date: moment().format("YYYYMMDD"),
                 stockNo: data,
             },
         })
-            .then((response) => {
-                console.log(response.data);
-            });
+    })
+    .then((response) => {
+        console.log(response.data);
     })
     .catch((err) => { //判斷錯要執行的東西放這裡
         console.error(err);
-    })
+    });
 

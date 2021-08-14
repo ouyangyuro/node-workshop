@@ -1,8 +1,7 @@
-console.log("car1")
-const car2 = require("./car2")
+console.log("car2")
 
-let brand = "Audi";
-let color = "blue";
+let brand = "Ford";
+let color = "black";
 let owner = "";
 
 function setOwner(name){

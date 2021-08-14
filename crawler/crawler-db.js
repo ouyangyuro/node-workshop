@@ -1,7 +1,7 @@
 const axios = require("axios");
 const moment = require("moment");
 // console.log(moment().format("YYYYMMDD"));
-const fs = require("fs");
+const fs = require("fs"); //other way: const {readFile} = require("fs");
 const mysql = require("mysql");
 require("dotenv").config();
 
@@ -32,6 +32,8 @@ connection.connect((err) => {
 //====== star 讀檔案中的代碼 ======//
 function readStock() {
     return new Promise((res, rej) => {
+
+        //required->const {readFile} = require("fs"); can use this wat to read readFile("stock.txt", "utf8", (err, data) =>{};
 
         fs.readFile("stock.txt", "utf8", (err, data) => { //非同步 //把判斷對錯放Promise物件裡
             // console.log(data);

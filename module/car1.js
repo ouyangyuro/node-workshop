@@ -3,8 +3,11 @@ let brand = "Audi";
 let color = "blue";
 let owner = "";
 
-function showOwner(name){
+function setOwner(name){
     owner = name;
+}
+
+function showOwner(){
     return owner;
 }
 
@@ -19,5 +22,6 @@ function showColor(){
 module.exports = {
     showOwner,
     showBrand,
-    showColor
+    showColor,
+    setOwner
 }

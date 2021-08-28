@@ -10,6 +10,7 @@ let connection = mysql.createPool({ //宣告時要用let不能用const
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
   connectionLimit: process.env.CONNECTION_LIMIT, //預先設置連線的數量
+  dateStrings: true, // 資料庫date長怎樣就怎樣，不要改成js的date格式
 });
 
 connection = Promise.promisifyAll(connection);

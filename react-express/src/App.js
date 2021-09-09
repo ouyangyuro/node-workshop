@@ -1,63 +1,41 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-
-const stockURL = `http://localhost:3500/stock`;
+import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
+// import axios from 'axios';
+//====== below components star ======//
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
+import Login from './components/Login';
+import Signup from './components/Signup';
+import Stock from './components/Stock';
+import StockDetail from './components/StockDetail';
+//====== above components end ======//
 
 function App() {
-  const [data, setData] = useState([]);
-  const [deltail, setDeltail] = useState([]);
-
-  useEffect(() => {
-    async function fetchData() {
-      const result = await axios.get(stockURL);
-      const result1 = await axios.get(stockURL + '/2330');
-      // console.log(result.data); //for check
-      // console.log(result1.data[0]); //for check
-      setData(result.data);
-      setDeltail(result1.data[9]);
-    }
-    fetchData();
-  }, []);
+  const [auth, setAuth] = useState(false);
 
   return (
-    <>
-      <div className="container">
-        <table className="table table-bordered">
-          <thead>
-            <tr>
-              {data.map((item) => (
-                <th key={item.stock_id}>{item.stock_name}</th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              {data.map((item, i) => (
-                <td key={i}>{item.stock_id}</td>
-              ))}
-            </tr>
-          </tbody>
-        </table>
-        <table className="table table-bordered">
-          <thead>
-            <tr>
-              <td>股票代碼：{deltail.stock_id}</td>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>日期：{deltail.date}</td>
-            </tr>
-            <tr>
-              <td>最高點：{deltail.high_price}</td>
-            </tr>
-            <tr>
-              <td>最低點：{deltail.low_price}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </>
+    <Router>
+      <>
+        <Navbar auth={auth} setAuth={setAuth} />
+
+        <Switch>
+          <Route path="/login">
+            <Login auth={auth} setAuth={setAuth} />
+          </Route>
+          <Route path="/signup">
+            <Signup auth={auth} setAuth={setAuth} />
+          </Route>
+          <Route path="/stock/:stockId">
+            <StockDetail />
+          </Route>
+          <Route exact path="/">
+            <Stock />
+          </Route>
+        </Switch>
+
+        <Footer />
+      </>
+    </Router>
   );
 }
 

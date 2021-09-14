@@ -61,6 +61,21 @@ function Navbar(props) {
                 關於
               </a>
             </li>
+            <li>
+              <Link className="nav-font" to="/">
+                股票首頁
+              </Link>
+            </li>
+            <li>
+              <Link className="nav-font" to="/test1">
+                test1
+              </Link>
+            </li>
+            <li>
+              <Link className="nav-font" to="/test2">
+                test2
+              </Link>
+            </li>
           </ul>
         </nav>
 
